@@ -18,7 +18,7 @@ Future<bool> showAlertDialog({
     context: context,
     builder: (context) => CupertinoAlertDialog(
       title: Text(title, style: TextStyle(fontSize: 16, color: Colors.red)),
-      content: Text(content, style: TextStyle(fontSize: 16)),
+      content: Text(content, style: const TextStyle(fontSize: 16)),
       actions: <Widget>[
         if (cancelActionText != null)
           CupertinoDialogAction(

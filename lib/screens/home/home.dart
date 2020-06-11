@@ -3,7 +3,9 @@ import 'package:enlightenfy/screens/tabpages/groups.dart';
 import 'package:enlightenfy/screens/tabpages/home.dart';
 import 'package:enlightenfy/screens/tabpages/jobs.dart';
 import 'package:enlightenfy/utils/colors.dart';
+import 'package:enlightenfy/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -27,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _controller = PageController(keepPage: true, initialPage: 0);
+    Box<String> userDetailsBox = Hive.box(userDetails);
+    userToken = userDetailsBox.get('token');
     super.initState();
   }
 

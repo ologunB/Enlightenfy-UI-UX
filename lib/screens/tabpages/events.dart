@@ -1,5 +1,6 @@
 import 'package:enlightenfy/utils/colors.dart';
 import 'package:enlightenfy/widgets/button.dart';
+import 'package:enlightenfy/widgets/dialog.dart';
 import 'package:enlightenfy/widgets/event_action.dart';
 import 'package:flutter/material.dart';
 
@@ -78,7 +79,11 @@ class _EventsPageScreenState extends State<EventsPageScreen> {
                       return EventAction(
                         icon: _icons[index], 
                         label: _actionLabel[index],
-                        onTap: () => showJoinDialog()
+                        onTap: () => showJoinDialog(
+                          context,
+                          _controller,
+                          'Paste Group link or name here',
+                        )
                       );
                     })
                   ),
@@ -91,46 +96,5 @@ class _EventsPageScreenState extends State<EventsPageScreen> {
     );
   }
 
-  void showJoinDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10)
-            ),
-            padding: const EdgeInsets.all(10.0),
-            height: 200.0,
-            child: Column(
-              children: <Widget>[
-                const Text(
-                  'Paste Group link or name here '
-                ),
-                const Divider(),
-                TextFormField(
-                  controller: _controller, 
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0)
-                    )
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                Button(
-                  label: 'Continue',
-                  onPressed: () {},
-                  color: AppColors.backgroundColor,
-                )
-              ],
-            ),
-          ),
-        );
-      }
-    );
-  }
+  
 }

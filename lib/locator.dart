@@ -1,3 +1,5 @@
+import 'package:enlightenfy/core/services/user_details_service.dart';
+import 'package:enlightenfy/core/viewmodels/user_details_model.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/services/api.dart';
@@ -10,7 +12,8 @@ GetIt locator = GetIt.instance;
 void setupLocator() {
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => Api());
-  locator.registerLazySingleton(() => Connection());
+  locator.registerLazySingleton(() => UserDetailService());
 
   locator.registerFactory(() => AuthModel());
+  locator.registerFactory(() => UserDetailsModel());
 }

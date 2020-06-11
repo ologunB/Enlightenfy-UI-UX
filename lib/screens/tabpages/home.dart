@@ -1,13 +1,12 @@
-import 'package:enlightenfy/screens/auth/login.dart';
 import 'package:enlightenfy/screens/event/events.dart';
+import 'package:enlightenfy/screens/home/profile.dart';
 import 'package:enlightenfy/utils/colors.dart';
-import 'package:enlightenfy/utils/constants.dart';
 import 'package:enlightenfy/utils/navigation.dart';
-import 'package:enlightenfy/widgets/alert_dialog.dart';
 import 'package:enlightenfy/widgets/event.dart';
 import 'package:enlightenfy/widgets/search_field.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+
+import '../../widgets/toast.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key key}) : super(key: key);
@@ -69,8 +68,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     style: TextStyle(
                         fontSize: 18.0, color: AppColors.backgroundColor)),
                 const Divider(),
-                const ListTile(
-                  title: Text('Account'),
+                ListTile(
+                  title: const Text('Account'),
+                  onTap: () {
+                    push(context, const ProfileScreen());
+                   },
                 ),
                 const ListTile(
                   title: Text('Settings and Privacy'),
@@ -96,29 +98,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   title: Text('Meeting Analysis'),
                 ),
                 const Divider(),
-                InkWell(
-                  onTap: () async {
-                    await showAlertDialog(
-                        onCancel: () {
-                          Navigator.pop(context);
-                        },
-                        onOK: () async {
-                          final Box<String> userDetailsBox =
-                              Hive.box(userDetails);
-                          await userDetailsBox.put('email', 'email');
-                          await userDetailsBox.put('token', 'token');
-                          await userDetailsBox.put('type', 'Login');
-                          pushandRemove(context, const LoginScreen());
-                        },
-                        cancelActionText: 'NO',
-                        context: context,
-                        title: 'Confirmation',
-                        content: 'Do you want to log out?',
-                        defaultActionText: 'YES');
-                  },
-                  child: const ListTile(
-                    title: Text('Sign out'),
-                  ),
+                const ListTile(
+                  title: Text('Sign out'),
                 ),
               ],
             ),

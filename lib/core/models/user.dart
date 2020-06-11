@@ -1,20 +1,35 @@
-class User {
-  int id;
-  String name;
-  String password;
-  User({this.id, this.name, this.password});
+import 'package:enlightenfy/core/models/education.dart';
+import 'package:enlightenfy/core/models/experience.dart';
 
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
+class User {
+  String firstname;
+  String lastname;
+  String password;
+  List educations;
+  List experiences;
+
+  User(
+      {this.firstname,
+      this.lastname,
+      this.password,
+      this.educations,
+      this.experiences});
+
+  User.fromJson(Map<String, Object> json) {
+    firstname = json['firstname'];
+    lastname = json['lastname'];
     password = json['password'];
+    educations = json['education'];
+    experiences = json['experience'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['password'] = this.password;
+  Map<String, Object> toJson() {
+    final Map<String, Object> data = <String, Object>{};
+    data['firstname'] = firstname;
+    data['lastname'] = lastname;
+    data['password'] = password;
+    data['education'] = educations;
+    data['experience'] = experiences;
     return data;
   }
 }
