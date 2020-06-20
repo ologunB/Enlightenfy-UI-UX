@@ -11,7 +11,6 @@ class UserDetailsModel extends BaseModel {
 
   User get mUser => _userDetailService.mUser;
   User user;
-  String message;
 
   Future<User> getDetails() async {
     setState(ViewState.Busy);
@@ -33,9 +32,10 @@ class UserDetailsModel extends BaseModel {
 
     Map<String, Object> map = await _userDetailService.updateExperience(
         title, description, company_name, from, to);
+    String message = 'null';
 
     if (map['statusCode'] == 201) {
-      message = map['message'];
+      message = map['data'];
       mUser.experiences.add({
         'title': title,
         'company_name': company_name,
@@ -43,8 +43,8 @@ class UserDetailsModel extends BaseModel {
         'from': from,
         'to': to
       });
-    } else {
-      user = map['message'];
+     } else {
+      message = map['data'];
     }
     setState(ViewState.Idle);
     return message;

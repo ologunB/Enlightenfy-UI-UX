@@ -30,13 +30,15 @@ class UserDetailService {
       String body = response.body;
       int code = response.statusCode;
 
-      Map data = jsonDecode(body)["data"];
+      Map data = jsonDecode(body)['data'];
       print(data);
       user = User.fromJson(data);
 
       messageMaker(code, data);
     }).timeout(const Duration(seconds: 30), onTimeout: () {
       messageMaker(408, {'message': 'Connection timed out!'});
+    }).catchError((e) {
+      messageMaker(408, {'message': 'Error!'});
     });
     return map;
   }
@@ -46,13 +48,17 @@ class UserDetailService {
     final String url = '$endpoint/auth/update/experience';
     var headers = {'Authorization': 'Bearer $userToken'};
 
-    await client.patch(url, body: {
-      'title': title,
-      'description': description,
-      'company_name': company_name,
-      'from': from,
-      'to': to
-    }, headers: headers).then((http.Response response) {
+    await client
+        .patch(url,
+            body: {
+              'title': title,
+              'description': description,
+              'company_name': company_name,
+              'from': from,
+              'to': to
+            },
+            headers: headers)
+        .then((http.Response response) {
       String body = response.body;
       int code = jsonDecode(body)['statusCode'];
       String message = jsonDecode(body)['message'];
@@ -65,6 +71,7 @@ class UserDetailService {
     }).timeout(const Duration(seconds: 30), onTimeout: () {
       messageMaker2(408, 'Connection timed out!');
     });
+
     return map;
   }
 }

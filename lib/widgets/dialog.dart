@@ -159,8 +159,9 @@ void showExperienceDialog(
                                   fromController.text,
                                   toController.text);
 
-                              if (value == 'Updated') {
+                              if (value == 'updated') {
                                 Navigator.pop(context);
+
                                 await showCupertinoDialog(
                                   context: context,
                                   builder: (BuildContext context) =>
@@ -169,12 +170,12 @@ void showExperienceDialog(
                                         style: TextStyle(
                                             fontSize: 16, color: Colors.red)),
                                     content: const Text('Experience Updated!',
-                                        style: const TextStyle(fontSize: 16)),
+                                        style:   TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                                     actions: <Widget>[
                                       CupertinoDialogAction(
                                           child: const Text('OK'),
                                           onPressed: () =>
-                                              Navigator.pop(context)),
+                                              Navigator.pop(  context)),
                                     ],
                                   ),
                                 );

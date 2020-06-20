@@ -12,13 +12,15 @@ class ProfileCard extends StatelessWidget {
   Widget getList() {
     Widget widget;
     if (title == 'Experience') {
+      print(itemList);
       List<Experience> exps = List();
-      for(var data in itemList ){
+      for (var data in itemList) {
         exps.add(Experience.fromJson(data));
       }
       widget = exps.isEmpty
           ? Text('No $title yet, Add $title')
           : ListView.builder(
+              physics: const ClampingScrollPhysics(),
               itemBuilder: (context, index) {
                 return ListTile(
                     title: Text(exps[index].title),
@@ -31,6 +33,7 @@ class ProfileCard extends StatelessWidget {
       widget = itemList.isEmpty
           ? Text('No $title yet, Add $title')
           : ListView.builder(
+              physics: const ClampingScrollPhysics(),
               itemBuilder: (context, index) {
                 return ListTile(
                     title: itemList[index].school,
